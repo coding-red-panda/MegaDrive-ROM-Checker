@@ -32,6 +32,7 @@
 #include <utility>
 #include <fstream>
 #include "support/Copyright.h"
+#include "support/SerialNumber.h"
 #include "support/Util.h"
 
 class Rom {
@@ -41,9 +42,11 @@ private:
     static constexpr int COPYRIGHT_ADDRESS = 0x110;
     static constexpr int DOMESTIC_TITLE_ADDRESS = 0x120;
     static constexpr int OVERSEAS_TITLE_ADDRESS = 0x150;
+    static constexpr int SERIAL_NUMBER_ADDRESS = 0x180;
 
     static constexpr int TITLE_LENGTH = 48;
     static constexpr int DWORD_LENGTH = 16;
+    static constexpr int SERIAL_LENGTH = 14;
     static constexpr int EXTRA_LENGTH = 12;
     static constexpr int RANGE_LENGTH = 8;
     static constexpr int REGION_LENGTH = 3;
@@ -62,6 +65,7 @@ public:
     [[nodiscard]] Support::Copyright getCopyright() const;
     [[nodiscard]] std::string getDomesticTitle() const;
     [[nodiscard]] std::string getOverseasTitle() const;
+    [[nodiscard]] Support::SerialNumber getSerialNumber() const;
 };
 
 #endif //ROM_H

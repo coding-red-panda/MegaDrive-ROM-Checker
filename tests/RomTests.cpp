@@ -72,3 +72,24 @@ TEST(RomTestSuite, GetDomesticTitleJP) {
     const std::string title = rom.getDomesticTitle();
     EXPECT_EQ(title, "SORCER KINGDOM");
 }
+
+TEST(RomTestSuite, GetSerialNumberEU) {
+    const Rom rom("resources/Aladdin.md");
+
+    const Support::SerialNumber serial = rom.getSerialNumber();
+    EXPECT_EQ(serial.toString(), "GM MK-1058 -00");
+}
+
+TEST(RomTestSuite, GetSerialNumberUS) {
+    const Rom rom("resources/Sonic The Hedgehog 3.md");
+
+    const Support::SerialNumber serial = rom.getSerialNumber();
+    EXPECT_EQ(serial.toString(), "GM MK-1079 -00");
+}
+
+TEST(RomTestSuite, GetSerialNumberJP) {
+    const Rom rom("resources/Sorcer Kingdom.md");
+
+    const Support::SerialNumber serial = rom.getSerialNumber();
+    EXPECT_EQ(serial.toString(), "GM T-25113 -00");
+}

@@ -52,3 +52,9 @@ std::string Rom::getDomesticTitle() const {
 std::string Rom::getOverseasTitle() const {
     return extractString(OVERSEAS_TITLE_ADDRESS, TITLE_LENGTH);
 }
+
+Support::SerialNumber Rom::getSerialNumber() const {
+    std::string raw = extractString(SERIAL_NUMBER_ADDRESS, SERIAL_LENGTH);
+
+    return Support::SerialNumber {raw };
+}

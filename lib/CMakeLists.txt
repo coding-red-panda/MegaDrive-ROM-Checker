@@ -6,6 +6,8 @@ set(HEADER_FILES
         support/Copyright.h
         support/Util.cpp
         support/Util.h
+        support/SerialNumber.cpp
+        support/SerialNumber.h
 )
 
 set(SOURCE_FILES
@@ -14,6 +16,8 @@ set(SOURCE_FILES
         support/Copyright.h
         support/Util.cpp
         support/Util.h
+        support/SerialNumber.cpp
+        support/SerialNumber.h
 )
 
 add_library(MegaDrive_ROM_Checker_lib STATIC ${HEADER_FILES} ${SOURCE_FILES})
