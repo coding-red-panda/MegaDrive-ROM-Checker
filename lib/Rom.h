@@ -32,12 +32,25 @@
 #include <utility>
 #include <fstream>
 #include "support/Copyright.h"
+#include "support/Util.h"
 
 class Rom {
 private:
     std::string path;
     static constexpr int SYSTEM_TYPE_ADDRESS = 0x100;
     static constexpr int COPYRIGHT_ADDRESS = 0x110;
+    static constexpr int DOMESTIC_TITLE_ADDRESS = 0x120;
+    static constexpr int OVERSEAS_TITLE_ADDRESS = 0x150;
+
+    static constexpr int TITLE_LENGTH = 48;
+    static constexpr int DWORD_LENGTH = 16;
+    static constexpr int EXTRA_LENGTH = 12;
+    static constexpr int RANGE_LENGTH = 8;
+    static constexpr int REGION_LENGTH = 3;
+    static constexpr int CHECKSUM_LENGTH = 2;
+
+    static constexpr int FIRST_PADDING_LENGTH = 40;
+    static constexpr int SECOND_PADDING_LENGTH = 13;
 
     [[nodiscard]] std::string extractString(int address, size_t length) const;
 
@@ -47,6 +60,8 @@ public:
 
     [[nodiscard]] std::string getSystemType() const;
     [[nodiscard]] Support::Copyright getCopyright() const;
+    [[nodiscard]] std::string getDomesticTitle() const;
+    [[nodiscard]] std::string getOverseasTitle() const;
 };
 
 #endif //ROM_H

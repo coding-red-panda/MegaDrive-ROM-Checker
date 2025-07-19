@@ -11,14 +11,18 @@ Support::Copyright Rom::getCopyright() const {
 
     copyrightString.erase(copyrightString.find_first_of("(C)"), 3); // Remove the "(C)" prefix
 
-    // Construct the Copyright object from the string
-    std::string publisher = copyrightString.substr(0, 4);
-    unsigned int year = std::stoi(copyrightString.substr(5, 4));
-    std::string month = copyrightString.substr(10, 3);
+    // Construct the Copyright object from the string,
+    // read from the back to account for special characters in the Publisher.
+    std::string month = copyrightString.substr(copyrightString.length() - 3, 3);
+    unsigned int year = std::stoi(copyrightString.substr(copyrightString.length() - 8, 4));
+    std::string publisher = copyrightString.substr(0, copyrightString.length() - 8);
 
     // Erase whitespace from publisher and month
     std::erase_if(publisher, ::isspace);
     std::erase_if(month, ::isspace);
+
+    // Erase special characters from Publisher
+    std::erase_if(publisher, [](const char x) { return x == '_'; });
 
     return {publisher, year, month};
 }
@@ -36,7 +40,15 @@ std::string Rom::extractString(int address, size_t length) const {
 
     // Convert to string and trim whitespace
     std::string string(buffer, sizeof(buffer));
-    string.erase(string.find_last_not_of(" \n\r\t") + 1);
+    Support::Util::trim(string);
 
     return string;
+}
+
+std::string Rom::getDomesticTitle() const {
+    return extractString(DOMESTIC_TITLE_ADDRESS, TITLE_LENGTH);
+}
+
+std::string Rom::getOverseasTitle() const {
+    return extractString(OVERSEAS_TITLE_ADDRESS, TITLE_LENGTH);
 }

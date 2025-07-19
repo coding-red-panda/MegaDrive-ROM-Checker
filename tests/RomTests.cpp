@@ -51,3 +51,24 @@ TEST(RomTestSuite, GetCopyrightAndReleaseDateJP) {
     EXPECT_EQ(copyright.getYear(), 1992);
     EXPECT_EQ(copyright.getMonth(), "JAN");
 }
+
+TEST(RomTestSuite, GetDomesticTitleEU) {
+    const Rom rom("resources/Aladdin.md");
+
+    const std::string title = rom.getDomesticTitle();
+    EXPECT_EQ(title, "ALADDIN");
+}
+
+TEST(RomTestSuite, GetDomesticTitleUS) {
+    const Rom rom("resources/Sonic The Hedgehog 3.md");
+
+    const std::string title = rom.getDomesticTitle();
+    EXPECT_EQ(title, "SONIC THE HEDGEHOG 3");
+}
+
+TEST(RomTestSuite, GetDomesticTitleJP) {
+    const Rom rom("resources/Sorcer Kingdom.md");
+
+    const std::string title = rom.getDomesticTitle();
+    EXPECT_EQ(title, "SORCER KINGDOM");
+}
