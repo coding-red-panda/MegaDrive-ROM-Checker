@@ -1,4 +1,7 @@
-#include "Rom.h"
+#include <fstream>
+#include <stdexcept>
+#include "rom.h"
+#include "support/util.h"
 
 Rom::Rom(std::string path) : path(std::move(path)) { }
 
@@ -6,7 +9,7 @@ std::string Rom::getSystemType() const {
     return extractString(SYSTEM_TYPE_ADDRESS, 16);
 }
 
-Support::Copyright Rom::getCopyright() const {
+support::Copyright Rom::getCopyright() const {
     std::string copyrightString = extractString(COPYRIGHT_ADDRESS, 16);
 
     copyrightString.erase(copyrightString.find_first_of("(C)"), 3); // Remove the "(C)" prefix
@@ -40,7 +43,7 @@ std::string Rom::extractString(int address, size_t length) const {
 
     // Convert to string and trim whitespace
     std::string string(buffer, sizeof(buffer));
-    Support::Util::trim(string);
+    support::Util::trim(string);
 
     return string;
 }
@@ -53,8 +56,8 @@ std::string Rom::getOverseasTitle() const {
     return extractString(OVERSEAS_TITLE_ADDRESS, TITLE_LENGTH);
 }
 
-Support::SerialNumber Rom::getSerialNumber() const {
+support::SerialNumber Rom::getSerialNumber() const {
     std::string raw = extractString(SERIAL_NUMBER_ADDRESS, SERIAL_LENGTH);
 
-    return Support::SerialNumber {raw };
+    return support::SerialNumber {raw };
 }

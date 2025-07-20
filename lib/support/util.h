@@ -1,14 +1,13 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <algorithm>
 #include <string>
 
-namespace Support {
+namespace support {
     class Util {
         public:
             void static trim(std::string &str);
     };
-} // Support
+} // support
 
 #endif //UTIL_H

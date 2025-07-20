@@ -1,10 +1,7 @@
-//
-// Created by redpanda on 7/19/2025.
-//
+#include "copyright.h"
+#include <format>
 
-#include "Copyright.h"
-
-namespace Support {
+namespace support {
     Copyright::Copyright(std::string publisher, unsigned int year, std::string month) :
         publisher(std::move(publisher)), year(year), month(std::move(month)) { }
 
@@ -24,4 +21,4 @@ namespace Support {
         return std::format("(C){0} {1} {2}", publisher, std::to_string(year), month);
     }
 
-} // Support
+} // support

@@ -14,9 +14,8 @@
 #define COPYRIGHT_H
 
 #include <string>
-#include <format>
 
-namespace Support {
+namespace support {
     class Copyright {
         private:
             std::string publisher;
@@ -31,6 +30,6 @@ namespace Support {
             [[nodiscard]] std::string getMonth() const;
             [[nodiscard]] std::string toString() const;
     };
-} // Support
+} // support
 
 #endif //COPYRIGHT_H

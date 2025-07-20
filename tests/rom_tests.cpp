@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "Rom.h"
+#include "rom.h"
 
 TEST(RomTestSuite, GetSystemTypeEU) {
     const Rom rom("resources/Aladdin.md");
@@ -25,7 +25,7 @@ TEST(RomTestSuite, GetSystemTypeJP) {
 TEST(RomTestSuite, GetCopyrightAndReleaseDateEU) {
     const Rom rom("resources/Aladdin.md");
 
-    const Support::Copyright copyright = rom.getCopyright();
+    const support::Copyright copyright = rom.getCopyright();
 
     EXPECT_EQ(copyright.getPublisher(), "SEGA");
     EXPECT_EQ(copyright.getYear(), 1993);
@@ -35,7 +35,7 @@ TEST(RomTestSuite, GetCopyrightAndReleaseDateEU) {
 TEST(RomTestSuite, GetCopyrightAndReleaseDateUS) {
     const Rom rom("resources/Sonic The Hedgehog 3.md");
 
-    const Support::Copyright copyright = rom.getCopyright();
+    const support::Copyright copyright = rom.getCopyright();
 
     EXPECT_EQ(copyright.getPublisher(), "SEGA");
     EXPECT_EQ(copyright.getYear(), 1993);
@@ -45,7 +45,7 @@ TEST(RomTestSuite, GetCopyrightAndReleaseDateUS) {
 TEST(RomTestSuite, GetCopyrightAndReleaseDateJP) {
     const Rom rom("resources/Sorcer Kingdom.md");
 
-    const Support::Copyright copyright = rom.getCopyright();
+    const support::Copyright copyright = rom.getCopyright();
 
     EXPECT_EQ(copyright.getPublisher(), "NCS");
     EXPECT_EQ(copyright.getYear(), 1992);
@@ -76,20 +76,20 @@ TEST(RomTestSuite, GetDomesticTitleJP) {
 TEST(RomTestSuite, GetSerialNumberEU) {
     const Rom rom("resources/Aladdin.md");
 
-    const Support::SerialNumber serial = rom.getSerialNumber();
+    const support::SerialNumber serial = rom.getSerialNumber();
     EXPECT_EQ(serial.toString(), "GM MK-1058 -00");
 }
 
 TEST(RomTestSuite, GetSerialNumberUS) {
     const Rom rom("resources/Sonic The Hedgehog 3.md");
 
-    const Support::SerialNumber serial = rom.getSerialNumber();
+    const support::SerialNumber serial = rom.getSerialNumber();
     EXPECT_EQ(serial.toString(), "GM MK-1079 -00");
 }
 
 TEST(RomTestSuite, GetSerialNumberJP) {
     const Rom rom("resources/Sorcer Kingdom.md");
 
-    const Support::SerialNumber serial = rom.getSerialNumber();
+    const support::SerialNumber serial = rom.getSerialNumber();
     EXPECT_EQ(serial.toString(), "GM T-25113 -00");
 }

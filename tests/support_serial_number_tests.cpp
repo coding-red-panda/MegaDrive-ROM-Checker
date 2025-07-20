@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
-#include "support/SerialNumber.h"
+#include "support/serial_number.h"
 
 TEST(SerialNumberSuite, SerialNumberTest) {
     std::string raw = "GM MK-1079 -00  ";
-    const auto serial = Support::SerialNumber(raw);
+    const auto serial = support::SerialNumber(raw);
 
     EXPECT_EQ("GM", serial.getType());
     EXPECT_EQ("MK-1079", serial.getSerial());
@@ -12,7 +12,7 @@ TEST(SerialNumberSuite, SerialNumberTest) {
 
 TEST(SerialNumberSuite, SerialNumberWithRevisionTest) {
     std::string raw = "GM MK-1079 -01  ";
-    const auto serial = Support::SerialNumber(raw);
+    const auto serial = support::SerialNumber(raw);
 
     EXPECT_EQ("GM", serial.getType());
     EXPECT_EQ("MK-1079", serial.getSerial());
@@ -21,21 +21,21 @@ TEST(SerialNumberSuite, SerialNumberWithRevisionTest) {
 
 TEST(SerialNumberSuite, toStringTest) {
     std::string raw = "GM MK-1079 -01  ";
-    const auto serial = Support::SerialNumber(raw);
+    const auto serial = support::SerialNumber(raw);
 
     EXPECT_EQ("GM MK-1079 -01", serial.toString());
 }
 
 TEST(SerialNumberSuite, toStringExtendedTest) {
     std::string raw = "GM MK-1079 -11  ";
-    const auto serial = Support::SerialNumber(raw);
+    const auto serial = support::SerialNumber(raw);
 
     EXPECT_EQ("GM MK-1079 -11", serial.toString());
 }
 
 TEST(SerialNumberSuite, toStringCustomTest) {
     std::string raw = "GM MK-1079 -1123";
-    const auto serial = Support::SerialNumber(raw);
+    const auto serial = support::SerialNumber(raw);
 
     EXPECT_EQ("GM MK-1079 -1123", serial.toString());
 }

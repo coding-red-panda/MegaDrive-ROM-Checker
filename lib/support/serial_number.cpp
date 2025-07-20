@@ -1,6 +1,8 @@
-#include "SerialNumber.h"
+#include <iomanip>
+#include "serial_number.h"
+#include "util.h"
 
-namespace Support {
+namespace support {
     SerialNumber::SerialNumber(std::string& raw) {
         Util::trim(raw);
 
@@ -33,4 +35,4 @@ namespace Support {
 
         return ss.str();
     }
-} // Support
+} // support

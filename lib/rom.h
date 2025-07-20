@@ -28,12 +28,8 @@
 #ifndef ROM_H
 #define ROM_H
 
-#include <algorithm>
-#include <utility>
-#include <fstream>
-#include "support/Copyright.h"
-#include "support/SerialNumber.h"
-#include "support/Util.h"
+#include "support/copyright.h"
+#include "support/serial_number.h"
 
 class Rom {
 private:
@@ -62,10 +58,10 @@ public:
     ~Rom() = default;
 
     [[nodiscard]] std::string getSystemType() const;
-    [[nodiscard]] Support::Copyright getCopyright() const;
+    [[nodiscard]] support::Copyright getCopyright() const;
     [[nodiscard]] std::string getDomesticTitle() const;
     [[nodiscard]] std::string getOverseasTitle() const;
-    [[nodiscard]] Support::SerialNumber getSerialNumber() const;
+    [[nodiscard]] support::SerialNumber getSerialNumber() const;
 };
 
 #endif //ROM_H

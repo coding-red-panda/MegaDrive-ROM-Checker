@@ -11,18 +11,12 @@
 // - ZZ: The revision of the game.
 //----------------------------------------------------------------------------------------------------------------------
 
-#ifndef SERIALNUMBER_H
-#define SERIALNUMBER_H
+#ifndef SERIAL_NUMBER_H
+#define SERIAL_NUMBER_H
 
-#include <algorithm>
-#include <array>
-#include <iomanip>
 #include <string>
-#include <sstream>
-#include <stdexcept>
-#include "Util.h"
 
-namespace Support {
+namespace support {
     class SerialNumber {
         private:
             std::string softwareType;
@@ -39,6 +33,6 @@ namespace Support {
 
             [[nodiscard]] std::string toString() const;
     };
-} // Support
+} // support
 
-#endif //SERIALNUMBER_H
+#endif //SERIAL_NUMBER_H
