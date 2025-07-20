@@ -1,5 +1,5 @@
-#include "copyright.h"
 #include <format>
+#include "copyright.h"
 
 namespace support {
     Copyright::Copyright(std::string publisher, unsigned int year, std::string month) :

@@ -8,6 +8,7 @@ set(HEADER_FILES
         support/Util.h
         support/serial_number.cpp
         support/serial_number.h
+        addresses.h
 )
 
 set(SOURCE_FILES

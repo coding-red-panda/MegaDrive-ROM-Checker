@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <iostream>
 
 #include "rom.h"
@@ -14,6 +15,8 @@ int main(int argc, char** argv) {
         std::cout << "Domestic Title: " << rom.getDomesticTitle() << std::endl;
         std::cout << "Overseas Title: " << rom.getOverseasTitle() << std::endl;
         std::cout << "Serial Number: " << rom.getSerialNumber().toString() << std::endl;
+        std::cout << "Stored Checksum: 0x" << std::hex << rom.getChecksum() << std::endl;
+        std::cout << "Calculated Checksum: 0x" << std::hex << rom.calculateChecksum() << std::endl;
     }
 
     std::cout << "Press Enter to exit..." << std::endl;

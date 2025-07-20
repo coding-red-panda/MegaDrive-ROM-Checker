@@ -1,15 +1,3 @@
-//----------------------------------------------------------------------------------------------------------------------
-// Copyright Class
-// ===============
-//
-// This class handles the copyright information of a ROM image.
-// The copyright information is typically found in the ROM header,
-// at the address 0x110, and consists of 16 bytes, in the format: "(C)XXXX YYYY.ZZZ"
-//
-// - XXXX: four character abbreviation of the publisher.
-// - YYYY: four digits of the year the game was released.
-// - ZZZ: three character abbreviation of the month the game was released.
-//----------------------------------------------------------------------------------------------------------------------
 #ifndef COPYRIGHT_H
 #define COPYRIGHT_H
 

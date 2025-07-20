@@ -93,3 +93,52 @@ TEST(RomTestSuite, GetSerialNumberJP) {
     const support::SerialNumber serial = rom.getSerialNumber();
     EXPECT_EQ(serial.toString(), "GM T-25113 -00");
 }
+
+TEST(RomTestSuite, GetChecksumEU) {
+    const Rom rom("resources/Aladdin.md");
+
+    const unsigned short checksum = rom.getChecksum();
+    EXPECT_EQ(checksum, 0xA5E3);
+}
+
+TEST(RomTestSuite, GetChecksumUS) {
+    const Rom rom("resources/Sonic The Hedgehog 3.md");
+
+    const unsigned short checksum = rom.getChecksum();
+    EXPECT_EQ(checksum, 0xA8F2);
+}
+
+TEST(RomTestSuite, GetChecksumJP) {
+    const Rom rom("resources/Sorcer Kingdom.md");
+
+    const unsigned short checksum = rom.getChecksum();
+    EXPECT_EQ(checksum, 0xB8F7);
+}
+
+TEST(RomTestSuite, calculateChecksumEU) {
+    const Rom rom("resources/Aladdin.md");
+
+    const unsigned short checksum = rom.getChecksum();
+    const unsigned short calculatedChecksum = rom.calculateChecksum();
+
+    EXPECT_EQ(checksum, calculatedChecksum);
+}
+
+TEST(RomTestSuite, calculateChecksumUS) {
+    const Rom rom("resources/Sonic The Hedgehog 3.md");
+
+    const unsigned short checksum = rom.getChecksum();
+    const unsigned short calculatedChecksum = rom.calculateChecksum();
+
+    EXPECT_EQ(checksum, calculatedChecksum);
+}
+
+// The ROM "Sorcer Kingdom.md" is known to have an non-standard checksum.
+// This test is to ensure that the checksum calculation works correctly
+TEST(RomTestSuite, calculateChecksumJP) {
+    const Rom rom("resources/Sorcer Kingdom.md");
+
+    const unsigned short calculatedChecksum = rom.calculateChecksum();
+
+    EXPECT_EQ(calculatedChecksum, 0xC9BE);
+}

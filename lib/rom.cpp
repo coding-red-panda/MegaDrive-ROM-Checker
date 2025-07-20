@@ -1,16 +1,19 @@
+#include <cstdint>
 #include <fstream>
 #include <stdexcept>
+#include <vector>
+#include "addresses.h"
 #include "rom.h"
 #include "support/util.h"
 
 Rom::Rom(std::string path) : path(std::move(path)) { }
 
 std::string Rom::getSystemType() const {
-    return extractString(SYSTEM_TYPE_ADDRESS, 16);
+    return extractString(Addresses::SYSTEM_TYPE, 16);
 }
 
 support::Copyright Rom::getCopyright() const {
-    std::string copyrightString = extractString(COPYRIGHT_ADDRESS, 16);
+    std::string copyrightString = extractString(Addresses::COPYRIGHT, 16);
 
     copyrightString.erase(copyrightString.find_first_of("(C)"), 3); // Remove the "(C)" prefix
 
@@ -36,28 +39,76 @@ std::string Rom::extractString(int address, size_t length) const {
     if (!ifs.is_open()) { throw std::runtime_error("Failed to open ROM file: " + path); }
 
     // Read the required bytes from the ROM header into our buffer
-    ifs.seekg(address);
     char buffer[length];
-    ifs.read(buffer, sizeof(buffer));
+
+    ifs.seekg(address);
+    ifs.read(buffer, length);
     ifs.close();
 
     // Convert to string and trim whitespace
-    std::string string(buffer, sizeof(buffer));
+    std::string string(buffer, length);
     support::Util::trim(string);
 
     return string;
 }
 
 std::string Rom::getDomesticTitle() const {
-    return extractString(DOMESTIC_TITLE_ADDRESS, TITLE_LENGTH);
+    return extractString(Addresses::DOMESTIC_TITLE, Addresses::TITLE_LENGTH);
 }
 
 std::string Rom::getOverseasTitle() const {
-    return extractString(OVERSEAS_TITLE_ADDRESS, TITLE_LENGTH);
+    return extractString(Addresses::OVERSEAS_TITLE, Addresses::TITLE_LENGTH);
 }
 
 support::SerialNumber Rom::getSerialNumber() const {
-    std::string raw = extractString(SERIAL_NUMBER_ADDRESS, SERIAL_LENGTH);
+    std::string raw = extractString(Addresses::SERIAL_NUMBER, Addresses::SERIAL_LENGTH);
 
     return support::SerialNumber {raw };
+}
+
+unsigned short Rom::getChecksum() const {
+    std::ifstream ifs(path);
+
+    if (!ifs.is_open()) { throw std::runtime_error("Failed to open ROM file: " + path); }
+
+    // Read the required bytes from the ROM header into our buffer
+    char buffer[Addresses::CHECKSUM_LENGTH];
+
+    ifs.seekg(Addresses::CHECKSUM);
+    ifs.read(buffer, Addresses::CHECKSUM_LENGTH);
+    ifs.close();
+
+    // Convert the read bytes into an unsigned short (16 bit)
+    return static_cast<unsigned short>(buffer[0]) << 8 | static_cast<unsigned char>(buffer[1]);
+}
+
+unsigned short Rom::calculateChecksum() const {
+    std::ifstream ifs(path, std::ios::binary);
+    std::uint16_t checksum = 0;
+
+    if (!ifs.is_open()) { throw std::runtime_error("Failed to open ROM file: " + path); }
+
+    // Set the stream to the beginning of the ROM data so we can calculate the checksum.
+    // The checksum is calculated from the data by reading every 16-bit word (unsigned short)
+    // and summing them up, then taking the lower 16 bits of the result.
+    ifs.seekg(Addresses::ROM_DATA);
+
+    while (!ifs.eof()) {
+        std::vector<std::byte> buffer(Addresses::CHECKSUM_LENGTH);
+
+        ifs.read(reinterpret_cast<char*>(buffer.data()), Addresses::CHECKSUM_LENGTH);
+
+        // Convert the read bytes into an unsigned short (16 bit)
+        // The order needs to be swapped to respect the endian-ness of the ROM.
+        const unsigned short word = static_cast<unsigned short>(buffer[0]) << 8 | static_cast<unsigned char>(buffer[1]);
+        checksum += word;
+    }
+
+    // Always close the file stream after reading.
+    ifs.close();
+
+    // Return the lower 16 bits of the checksum as per the ROM specification.
+    const unsigned short lower_checksum = checksum & 0xFFFF;
+
+    return lower_checksum;
 }
