@@ -142,3 +142,72 @@ TEST(RomTestSuite, calculateChecksumJP) {
 
     EXPECT_EQ(calculatedChecksum, 0xC9BE);
 }
+
+TEST(RomTestSuite, getDeviceSupportEU) {
+    const Rom rom("resources/Aladdin.md");
+    const support::DeviceSupport deviceSupport = rom.getDeviceSupport();
+
+    EXPECT_EQ(deviceSupport.supportsThreeButtonController(), true);
+    EXPECT_EQ(deviceSupport.supportsSixButtonController(), false);
+    EXPECT_EQ(deviceSupport.supportMasterSystemController(), false);
+    EXPECT_EQ(deviceSupport.supportsAnalogJoystick(), false);
+    EXPECT_EQ(deviceSupport.supportsMultitap(), false);
+    EXPECT_EQ(deviceSupport.supportsLightGun(), false);
+    EXPECT_EQ(deviceSupport.supportsActivator(), false);
+    EXPECT_EQ(deviceSupport.supportsMouse(), false);
+    EXPECT_EQ(deviceSupport.supportsTrackball(), false);
+    EXPECT_EQ(deviceSupport.supportsTablet(), false);
+    EXPECT_EQ(deviceSupport.supportsPaddle(), false);
+    EXPECT_EQ(deviceSupport.supportsKeyboard(), false);
+    EXPECT_EQ(deviceSupport.supportsRS232(), false);
+    EXPECT_EQ(deviceSupport.supportsPrinter(), false);
+    EXPECT_EQ(deviceSupport.supportsCDROM(), false);
+    EXPECT_EQ(deviceSupport.supportsFloppyDrive(), false);
+    EXPECT_EQ(deviceSupport.supportsDownload(), false);
+}
+
+TEST(RomTestSuite, getDeviceSupportUS) {
+    const Rom rom("resources/Sonic The Hedgehog 3.md");
+    const support::DeviceSupport deviceSupport = rom.getDeviceSupport();
+
+    EXPECT_EQ(deviceSupport.supportsThreeButtonController(), true);
+    EXPECT_EQ(deviceSupport.supportsSixButtonController(), false);
+    EXPECT_EQ(deviceSupport.supportMasterSystemController(), false);
+    EXPECT_EQ(deviceSupport.supportsAnalogJoystick(), false);
+    EXPECT_EQ(deviceSupport.supportsMultitap(), false);
+    EXPECT_EQ(deviceSupport.supportsLightGun(), false);
+    EXPECT_EQ(deviceSupport.supportsActivator(), false);
+    EXPECT_EQ(deviceSupport.supportsMouse(), false);
+    EXPECT_EQ(deviceSupport.supportsTrackball(), false);
+    EXPECT_EQ(deviceSupport.supportsTablet(), false);
+    EXPECT_EQ(deviceSupport.supportsPaddle(), false);
+    EXPECT_EQ(deviceSupport.supportsKeyboard(), false);
+    EXPECT_EQ(deviceSupport.supportsRS232(), false);
+    EXPECT_EQ(deviceSupport.supportsPrinter(), false);
+    EXPECT_EQ(deviceSupport.supportsCDROM(), false);
+    EXPECT_EQ(deviceSupport.supportsFloppyDrive(), false);
+    EXPECT_EQ(deviceSupport.supportsDownload(), false);
+}
+
+TEST(RomTestSuite, getDeviceSupportJP) {
+    const Rom rom("resources/Sorcer Kingdom.md");
+    const support::DeviceSupport deviceSupport = rom.getDeviceSupport();
+
+    EXPECT_EQ(deviceSupport.supportsThreeButtonController(), true);
+    EXPECT_EQ(deviceSupport.supportsSixButtonController(), false);
+    EXPECT_EQ(deviceSupport.supportMasterSystemController(), false);
+    EXPECT_EQ(deviceSupport.supportsAnalogJoystick(), false);
+    EXPECT_EQ(deviceSupport.supportsMultitap(), false);
+    EXPECT_EQ(deviceSupport.supportsLightGun(), false);
+    EXPECT_EQ(deviceSupport.supportsActivator(), false);
+    EXPECT_EQ(deviceSupport.supportsMouse(), false);
+    EXPECT_EQ(deviceSupport.supportsTrackball(), false);
+    EXPECT_EQ(deviceSupport.supportsTablet(), false);
+    EXPECT_EQ(deviceSupport.supportsPaddle(), false);
+    EXPECT_EQ(deviceSupport.supportsKeyboard(), false);
+    EXPECT_EQ(deviceSupport.supportsRS232(), false);
+    EXPECT_EQ(deviceSupport.supportsPrinter(), false);
+    EXPECT_EQ(deviceSupport.supportsCDROM(), false);
+    EXPECT_EQ(deviceSupport.supportsFloppyDrive(), false);
+    EXPECT_EQ(deviceSupport.supportsDownload(), false);
+}

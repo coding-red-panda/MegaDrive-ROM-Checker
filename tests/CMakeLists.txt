@@ -5,7 +5,8 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 # Define the source files for the tests
 add_executable(Tests_run_all rom_tests.cpp
         support_util_tests.cpp
-        support_serial_number_tests.cpp)
+        support_serial_number_tests.cpp
+        support_device_support_tests.cpp)
 
 # Copy resources needed for tests
 # This is a custom target that copies the resources directory to the build output directory
